@@ -4,14 +4,14 @@
 #############################
 # 1. Create game board
 # 2. Player choose X or O
-# 3. Player choose square on game baord
+# 3. Player choose square on game board
 # 4. Check if player won
 # 5. Ask if play again
 
 
 #Create Game board
 def game_board():
-
+    print('\n'*100)
     print("Each number represents the square\n     |     |\n  7  |  8  |  9\n_____|_____|_____\n     |     |\n  4  |  5  |  6\n_____|_____|_____\n     |     |\n  1  |  2  |  3\n     |     |     \n\n")
 
     square = [' ',' ',' ',' ',' ',' ',' ',' ',' ']
@@ -53,3 +53,4 @@ def choose_xo():
             p1_choice = True
 
     return p1.capitalize()
+

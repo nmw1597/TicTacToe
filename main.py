@@ -18,7 +18,7 @@ def game_board():
 
     row1_4_7_9 = ['     |     |     ']
     row3_6 = ['_____|_____|_____']
-    row2 = ['  ' + square[6] + '  |  ' + square[7] + '  |  ' + square[8]]
+    row2 = ['  ' + square[8] + '  |  ' + square[7] + '  |  ' + square[6]]
     row5 = ['  ' + square[5] + '  |  ' + square[4] + '  |  ' + square[3]]
     row8 = ['  ' + square[2] + '  |  ' + square[1] + '  |  ' + square[0]]
 
@@ -34,6 +34,7 @@ def game_board():
     print(''.join(row1_4_7_9))
 
 
+#allows player1 to choose if they want to be X or O
 def choose_xo():
     p1 = ''
     p1_choice = False
@@ -76,10 +77,12 @@ def choose_square():
             else:
                 square_in_range = True
 
-    return int(square_choice)
+    return int(square_choice - 1)           #return the square number as int.  subtract 1 so it matches the square numbers
+
+def 3_in_a_row():
 
 
 
-game_board()
-choose_xo()
-choose_square()
+# game_board()
+# choose_xo()
+# choose_square()

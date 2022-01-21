@@ -33,8 +33,6 @@ def game_board():
     print(''.join(row8))
     print(''.join(row1_4_7_9))
 
-game_board()
-
 
 def choose_xo():
     p1 = ''
@@ -49,8 +47,39 @@ def choose_xo():
             print("Please select X or O")
         else:
             p1 = p1.capitalize()
-            print(f'"You have chosen {p1}')
+            print(f'You have chosen {p1}')
             p1_choice = True
 
     return p1.capitalize()
 
+
+def choose_square():
+
+    square_range = range(1, 10)
+    square_is_digit = False
+    square_in_range = False
+
+    while square_is_digit == False or square_in_range == False:
+
+        square_choice = input("Pick a square. (1-9)")
+
+        # check if digit
+        if square_choice.isdigit() == False:
+            print("Your choice is not a digit.")
+        else:
+            square_is_digit = True
+
+        # check if within range
+        if square_choice.isdigit():
+            if int(square_choice) not in square_range:
+                print("Your choice is not within range. Please choose a number between 1-9")
+            else:
+                square_in_range = True
+
+    return int(square_choice)
+
+
+
+game_board()
+choose_xo()
+choose_square()

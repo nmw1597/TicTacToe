@@ -10,7 +10,7 @@
 
 
 #Create Game board
-def game_board():
+def game_board(marker, position):
     print('\n'*100)
     print("Each number represents the square\n     |     |\n  7  |  8  |  9\n_____|_____|_____\n     |     |\n  4  |  5  |  6\n_____|_____|_____\n     |     |\n  1  |  2  |  3\n     |     |     \n\n")
 
@@ -36,22 +36,22 @@ def game_board():
 
 #allows player1 to choose if they want to be X or O
 def choose_xo():
-    p1 = ''
+    p1_xo = ''
     p1_choice = False
     acceptable_p1_choice = ['x', 'o', 'X', 'O']
 
     while p1_choice == False:
 
-        p1 = input("Player 1, would you like to be X or O?")
+        p1_xo = input("Player 1, would you like to be X or O?")
 
-        if p1 not in acceptable_p1_choice:
+        if p1_xo not in acceptable_p1_choice:
             print("Please select X or O")
         else:
-            p1 = p1.capitalize()
-            print(f'You have chosen {p1}')
+            p1_xo = p1_xo.capitalize()
+            print(f'You have chosen {p1_xo}')
             p1_choice = True
 
-    return p1.capitalize()
+    return p1_xo.capitalize()
 
 
 def choose_square():
@@ -79,8 +79,60 @@ def choose_square():
 
     return int(square_choice - 1)           #return the square number as int.  subtract 1 so it matches the square numbers
 
-def 3_in_a_row():
+def winner():
 
+    win = [[6,5,2], [7,4,1], [8,3,0], [6,7,8], [5,4,3], [2,1,0], [6,4,3], [8,4,2]]
+    square_check_p1 = []
+    square_check_p2 = []
+    p1_wins = False
+    p2_wins = False
+
+    if square_check_p1 in win:
+        print('Player 1 WINS!')
+        p1_wins = True
+    elif square_check_p2 in win:
+        print('Player 2 WINS!')
+        p2_wins = True
+    else:
+        pass
+
+    return p1_wins
+    return p2_wins
+
+def place_selection(gameboard, marker, position):
+
+
+
+    position = choose_square()
+    marker = choose_xo()
+    gameboard = game_board()
+
+    if marker is 'X':
+        sq_mark = 'X'
+        position
+
+# def tictactoe():
+#
+#     p1_choice = choose_xo()
+#     game_board()
+#
+#     p1_square = choose_square()
+#     game_board(p1_choice,p1_square)
+
+
+
+
+
+    # winning:
+    # 652
+    # 741
+    # 830
+    # 678
+    # 543
+    # 210
+    #
+    # 643
+    # 842
 
 
 # game_board()

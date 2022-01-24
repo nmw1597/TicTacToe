@@ -10,7 +10,7 @@
 
 
 #Create Game board
-def game_board(marker, position):
+def gameboard():
     print('\n'*100)
     print("Each number represents the square\n     |     |\n  7  |  8  |  9\n_____|_____|_____\n     |     |\n  4  |  5  |  6\n_____|_____|_____\n     |     |\n  1  |  2  |  3\n     |     |     \n\n")
 
@@ -35,7 +35,7 @@ def game_board(marker, position):
 
 
 #allows player1 to choose if they want to be X or O
-def choose_xo():
+def marker():
     p1_xo = ''
     p1_choice = False
     acceptable_p1_choice = ['x', 'o', 'X', 'O']
@@ -48,13 +48,18 @@ def choose_xo():
             print("Please select X or O")
         else:
             p1_xo = p1_xo.capitalize()
-            print(f'You have chosen {p1_xo}')
+            print(f'Player 1 has chosen {p1_xo}')
             p1_choice = True
 
-    return p1_xo.capitalize()
+    if p1_xo == 'X'
+        turn = ['X','O','X','O','X','O','X','O','X']
+    else
+        turn = ['O','X','O','X','O','X','O','X','O']
+
+    return turn
 
 
-def choose_square():
+def position():
 
     square_range = range(1, 10)
     square_is_digit = False
@@ -77,7 +82,7 @@ def choose_square():
             else:
                 square_in_range = True
 
-    return int(square_choice - 1)           #return the square number as int.  subtract 1 so it matches the square numbers
+    return (int(square_choice) - 1)           #return the square number as int.  subtract 1 so it matches the square numbers
 
 def winner():
 
@@ -101,40 +106,23 @@ def winner():
 
 def place_selection(gameboard, marker, position):
 
+    gameboard = ['','','','','','','','','']
 
+    position = position()
 
-    position = choose_square()
-    marker = choose_xo()
-    gameboard = game_board()
+    if gameboard == ['','','','','','','','','']:
+        position = position()
+        turn = marker()
+        marker = turn[0]
+    marker = marker()
 
-    if marker is 'X':
-        sq_mark = 'X'
-        position
+    gameboard[position] = marker
 
-# def tictactoe():
-#
-#     p1_choice = choose_xo()
-#     game_board()
-#
-#     p1_square = choose_square()
-#     game_board(p1_choice,p1_square)
+    return(gameboard)
 
+def game():
 
+    gameboard()
+    xo =
 
-
-
-    # winning:
-    # 652
-    # 741
-    # 830
-    # 678
-    # 543
-    # 210
-    #
-    # 643
-    # 842
-
-
-# game_board()
-# choose_xo()
-# choose_square()
+place_selection(gameboard, marker, position)

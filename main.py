@@ -1,28 +1,14 @@
-#This is a TicTacToe game
-
-# To Do:
-#############################
-# 1. Create game board
-# 2. Player choose X or O
-# 3. Player choose square on game board
-# 4. Check if player won
-# 5. Ask if play again
+import random
 
 
-#Create Game board
-def gameboard():
-    print('\n'*100)
-    print("Each number represents the square\n     |     |\n  7  |  8  |  9\n_____|_____|_____\n     |     |\n  4  |  5  |  6\n_____|_____|_____\n     |     |\n  1  |  2  |  3\n     |     |     \n\n")
-
-    square = [' ',' ',' ',' ',' ',' ',' ',' ',' ']
-
+def display_board(square):
     row1_4_7_9 = ['     |     |     ']
     row3_6 = ['_____|_____|_____']
-    row2 = ['  ' + square[8] + '  |  ' + square[7] + '  |  ' + square[6]]
-    row5 = ['  ' + square[5] + '  |  ' + square[4] + '  |  ' + square[3]]
-    row8 = ['  ' + square[2] + '  |  ' + square[1] + '  |  ' + square[0]]
+    row2 = ['  ' + square[7] + '  |  ' + square[8] + '  |  ' + square[9]]
+    row5 = ['  ' + square[4] + '  |  ' + square[5] + '  |  ' + square[6]]
+    row8 = ['  ' + square[1] + '  |  ' + square[2] + '  |  ' + square[3]]
 
-    print("Current Game Board")
+    print('\n' * 100)
     print(''.join(row1_4_7_9))
     print(''.join(row2))
     print(''.join(row3_6))
@@ -34,95 +20,117 @@ def gameboard():
     print(''.join(row1_4_7_9))
 
 
-#allows player1 to choose if they want to be X or O
-def marker():
-    p1_xo = ''
-    p1_choice = False
-    acceptable_p1_choice = ['x', 'o', 'X', 'O']
+def player_input():
+    marker = ''
+    acceptable_p1_choice = ['X', 'O']
 
-    while p1_choice == False:
+    while marker not in acceptable_p1_choice:
+        marker = input('P1 would you like to be X or O?').upper()
 
-        p1_xo = input("Player 1, would you like to be X or O?")
-
-        if p1_xo not in acceptable_p1_choice:
-            print("Please select X or O")
-        else:
-            p1_xo = p1_xo.capitalize()
-            print(f'Player 1 has chosen {p1_xo}')
-            p1_choice = True
-
-    if p1_xo == 'X'
-        turn = ['X','O','X','O','X','O','X','O','X']
-    else
-        turn = ['O','X','O','X','O','X','O','X','O']
-
-    return turn
-
-
-def position():
-
-    square_range = range(1, 10)
-    square_is_digit = False
-    square_in_range = False
-
-    while square_is_digit == False or square_in_range == False:
-
-        square_choice = input("Pick a square. (1-9)")
-
-        # check if digit
-        if square_choice.isdigit() == False:
-            print("Your choice is not a digit.")
-        else:
-            square_is_digit = True
-
-        # check if within range
-        if square_choice.isdigit():
-            if int(square_choice) not in square_range:
-                print("Your choice is not within range. Please choose a number between 1-9")
-            else:
-                square_in_range = True
-
-    return (int(square_choice) - 1)           #return the square number as int.  subtract 1 so it matches the square numbers
-
-def winner():
-
-    win = [[6,5,2], [7,4,1], [8,3,0], [6,7,8], [5,4,3], [2,1,0], [6,4,3], [8,4,2]]
-    square_check_p1 = []
-    square_check_p2 = []
-    p1_wins = False
-    p2_wins = False
-
-    if square_check_p1 in win:
-        print('Player 1 WINS!')
-        p1_wins = True
-    elif square_check_p2 in win:
-        print('Player 2 WINS!')
-        p2_wins = True
+    if marker == 'X':
+        return ['X', 'O']
     else:
-        pass
+        return ['O', 'X']
 
-    return p1_wins
-    return p2_wins
 
-def place_selection(gameboard, marker, position):
+def marker_placement(board, marker, position):
+    board[position] = marker
 
-    gameboard = ['','','','','','','','','']
 
-    position = position()
+def winner(square, mark):
+    # 789
+    # 456
+    # 123
+    return ((square[7] == mark and square[5] == mark and square[3] == mark) or  # diagonal1
+            (square[9] == mark and square[5] == mark and square[1] == mark) or  # diagonal2
+            (square[7] == mark and square[4] == mark and square[1] == mark) or  # vertical1
+            (square[8] == mark and square[5] == mark and square[2] == mark) or  # vertical2
+            (square[9] == mark and square[6] == mark and square[3] == mark) or  # vertical3
+            (square[7] == mark and square[8] == mark and square[9] == mark) or  # horizontal1
+            (square[4] == mark and square[5] == mark and square[6] == mark) or  # horizontal2
+            (square[1] == mark and square[2] == mark and square[3] == mark))  # horizontal3
 
-    if gameboard == ['','','','','','','','','']:
-        position = position()
-        turn = marker()
-        marker = turn[0]
-    marker = marker()
 
-    gameboard[position] = marker
+def first_turn():
+    if random.randint(0, 1) == 0:
+        return "Player 1"
+    else:
+        return "Player 2"
 
-    return(gameboard)
 
-def game():
+def square_available(board, position):
+    return board[position] == ' '  # if position on board is empty, return True for square available
 
-    gameboard()
-    xo =
 
-place_selection(gameboard, marker, position)
+def board_full(board):
+    for i in range(1, 10):  # check squares 1-9
+        if square_available(board, i) == True:  # if any squres 1-9 are available (TRUE), then board is not full
+            return False
+    return True
+
+
+def player_choice(board):
+    position = 0  # set position to a number not in 1-9
+
+    while position not in [1, 2, 3, 4, 5, 6, 7, 8, 9] or not square_available(board, position):
+        position = int(input('Choose your next position: (1-9)'))
+
+    return position
+
+
+def play_again():
+    return (input('Do you want to play again? Yes or No:').upper().startswith('Y'))
+
+
+print('Let\'s play Tic Tac Toe!')
+
+while True:
+    theBoard = [' '] * 10
+    player1_marker, player2_marker = player_input()
+    turn = first_turn()
+    print(turn + ' will go first.')
+
+    play_game = input('Ready to play? Yes or No:')
+
+    if play_game.upper() == 'Y':
+        continue_game = True
+    else:
+        continue_game = False
+
+    while continue_game:
+        if turn == 'Player 1':
+            display_board(theBoard)
+            position = player_choice(theBoard)
+            marker_placement(theBoard, player1_marker, position)
+
+            if winner(theBoard, player1_marker):
+                display_board(theBoard)
+                print('Player 1 has won!')
+                continue_game = False
+            else:
+                if board_full(theBoard):
+                    display_board(theBoard)
+                    print('The game is a draw!')
+                    break
+                else:
+                    turn = 'Player 2'
+
+        else:
+            display_board(theBoard)
+            position = player_choice(theBoard)
+            marker_placement(theBoard, player2_marker, position)
+
+            if winner(theBoard, player2_marker):
+                display_board(theBoard)
+                print('Player 2 has won!')
+                continue_game = False
+            else:
+                if board_full(theBoard):
+                    display_board(theBoard)
+                    print('The game is a draw!')
+                    break
+                else:
+                    turn = 'Player 1'
+
+    if not play_again():
+        break
